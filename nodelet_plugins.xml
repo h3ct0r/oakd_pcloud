@@ -1,0 +1,9 @@
+<library path="lib/liboakd_pcloud">
+  <class name="oakd_pcloud/wls_filter"
+	 type="oakd_pcloud::WlsFilterNodelet"
+	 base_class_type="nodelet::Nodelet">
+    <description>
+      Nodelet to perform a WLS filter on the disparity map
+    </description>
+  </class>
+</library>

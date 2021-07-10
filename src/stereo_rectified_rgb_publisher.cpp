@@ -41,8 +41,10 @@ int main(int argc, char** argv){
     ROS_INFO_STREAM("Data queque sizes:" << imageDataQueues.size());
     
     // this part would be removed once we have calibration-api
-    std::string left_uri = camera_param_uri +"/" + "left.yaml";
+    std::string left_uri = camera_param_uri + "/" + "left.yaml";
     std::string right_uri = camera_param_uri + "/" + "right.yaml";
+    std::string rectified_left_uri = camera_param_uri + "/" + "rectified_left.yaml";
+    std::string rectified_right_uri = camera_param_uri + "/" + "rectified_right.yaml";
     std::string stereo_uri = camera_param_uri + "/" + "right.yaml";
     std::string color_uri = camera_param_uri + "/" + "color.yaml";
 

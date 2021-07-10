@@ -113,6 +113,7 @@ find_package(depthai REQUIRED)
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
 generate_dynamic_reconfigure_options(
   cfg/WLSfilter.cfg
+  cfg/MedianFilter.cfg
 )
 
 ###################################
@@ -179,6 +180,7 @@ target_link_libraries(${PROJECT_NAME}_lib
 ## Nodelets
 add_library(${PROJECT_NAME}
 	src/nodelet/wls_filter_nodelet.cpp
+	src/nodelet/median_filter_nodelet.cpp
 )
 
 add_dependencies(${PROJECT_NAME}

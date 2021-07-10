@@ -30,27 +30,27 @@
 
     <node pkg="nodelet" type="nodelet" name="nodelet_manager"  args="manager" output="screen"/>
     
-    <!-- <node pkg="nodelet" type="nodelet" name="wls_filter_depth_nodelet"
-        args="load oakd_pcloud/wls_filter nodelet_manager">
-        <remap from="depth_image" to="/stereo_rgb_node/stereo/depth"/>    
+    <node pkg="nodelet" type="nodelet" name="median_filter_depth_nodelet"
+        args="load oakd_pcloud/median_filter nodelet_manager">
+        <remap from="depth_image" to="/stereo_rgb_node/stereo/depth"/>
         <remap from="right_image" to="/stereo_rgb_node/rectified_right/image"/>
         <remap from="right_image_info" to="/stereo_rgb_node/rectified_right/camera_info"/>
         <remap from="left_image" to="/stereo_rgb_node/rectified_left/image"/>
         <remap from="left_image_info" to="/stereo_rgb_node/rectified_left/camera_info"/>
-        <remap from="wls_depth" to="/stereo_rgb_node/stereo/wls_depth_image"/>
-    </node> -->
+        <remap from="median_depth" to="/stereo_rgb_node/stereo/median_depth"/>
+    </node>
 
     <node pkg="nodelet" type="nodelet" name="depth_image_convertion_nodelet"
         args="load depth_image_proc/convert_metric nodelet_manager">
-        <!-- <remap from="image_raw" to="/stereo_rgb_node/stereo/wls_depth_image"/>     -->
-        <remap from="image_raw" to="/stereo_rgb_node/stereo/depth"/>    
+        <remap from="image_raw" to="/stereo_rgb_node/stereo/median_depth"/>
+<!--         <remap from="image_raw" to="/stereo_rgb_node/stereo/depth"/>     -->
         <remap from="image" to="/stereo_rgb_node/stereo/image"/>
     </node>
 
     <node pkg="nodelet" type="nodelet" name="depth_image_to_pointcloud_nodelet"
         args="load depth_image_proc/point_cloud_xyz nodelet_manager">
         <remap from="camera_info" to="/stereo_rgb_node/stereo/camera_info"/>
-        <remap from="image_rect" to="/stereo_rgb_node/stereo/image"/>    
+        <remap from="image_rect" to="/stereo_rgb_node/stereo/median_depth"/>
         <remap from="points" to="/stereo_rgb_node/stereo/points"/>
     </node>
 

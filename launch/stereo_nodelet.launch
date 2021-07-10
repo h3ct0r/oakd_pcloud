@@ -30,7 +30,7 @@
 
     <node pkg="nodelet" type="nodelet" name="nodelet_manager"  args="manager" output="screen"/>
     
-    <node pkg="nodelet" type="nodelet" name="wls_filter_depth_nodelet"
+    <!-- <node pkg="nodelet" type="nodelet" name="wls_filter_depth_nodelet"
         args="load oakd_pcloud/wls_filter nodelet_manager">
         <remap from="depth_image" to="/stereo_rgb_node/stereo/depth"/>    
         <remap from="right_image" to="/stereo_rgb_node/rectified_right/image"/>
@@ -38,11 +38,12 @@
         <remap from="left_image" to="/stereo_rgb_node/rectified_left/image"/>
         <remap from="left_image_info" to="/stereo_rgb_node/rectified_left/camera_info"/>
         <remap from="wls_depth" to="/stereo_rgb_node/stereo/wls_depth_image"/>
-    </node>
+    </node> -->
 
     <node pkg="nodelet" type="nodelet" name="depth_image_convertion_nodelet"
         args="load depth_image_proc/convert_metric nodelet_manager">
-        <remap from="image_raw" to="/stereo_rgb_node/stereo/wls_depth_image"/>    
+        <!-- <remap from="image_raw" to="/stereo_rgb_node/stereo/wls_depth_image"/>     -->
+        <remap from="image_raw" to="/stereo_rgb_node/stereo/depth"/>    
         <remap from="image" to="/stereo_rgb_node/stereo/image"/>
     </node>
 
@@ -53,9 +54,18 @@
         <remap from="points" to="/stereo_rgb_node/stereo/points"/>
     </node>
 
-    <!-- <node pkg="nodelet" type="nodelet" name="depth_image_to_pointcloud_rgb_nodelet"
+    <!-- Registration nodelet, projecting depth to RGB camera -->
+    <!-- <node pkg="nodelet" type="nodelet" name="register_rgb"
+            args="load depth_image_proc/register nodelet_manager">
+        <remap from="rgb/camera_info"             to="/stereo_rgb_node/color/camera_info" />
+        <remap from="depth/camera_info"           to="/stereo_rgb_node/stereo/camera_info" />
+        <remap from="depth/image_rect"            to="/stereo_rgb_node/stereo/image" />
+        <remap from="depth_registered/image_rect" to="/stereo_rgb_node/stereo/image_rect" />
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="depth_image_to_pointcloud_rgb_nodelet"
         args="load depth_image_proc/point_cloud_xyzrgb nodelet_manager">
-        <remap from="depth_registered/image_rect" to="/stereo_rgb_node/stereo/image"/> 
+        <remap from="depth_registered/image_rect" to="/stereo_rgb_node/stereo/image_rect"/> 
         <remap from="depth_registered/points" to="/stereo_rgb_node/stereo/points"/>
         <remap from="rgb/image_rect_color" to="/stereo_rgb_node/color/image"/>
         <remap from="rgb/camera_info" to="/stereo_rgb_node/color/camera_info"/>
